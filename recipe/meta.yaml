@@ -12,9 +12,10 @@ source:
   sha256: fb5d517b634c5629522004c59edce4d9050d89822408cab452c7d52fe5ae9824
 
 build:
-  noarch: python
-  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 1
+  noarch: python
+  script:
+    - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
 
 requirements:
   host:
@@ -26,15 +27,15 @@ requirements:
     - sphinx >=1.6.3
 
 test:
+  requires:
+    - pip
+    - python {{ python_min }}
   imports:
     - sphinxcontrib.cairosvgconverter
     - sphinxcontrib.inkscapeconverter
     - sphinxcontrib.rsvgconverter
   commands:
     - pip check
-  requires:
-    - pip
-    - python {{ python_min }}
 
 outputs:
   - name: sphinxcontrib-svg2pdfconverter
@@ -47,12 +48,12 @@ outputs:
         - {{ pin_subpackage("sphinxcontrib-svg2pdfconverter", max_pin="x.x.x") }}
         - cairosvg >=1.0
     test:
+      requires:
+        - pip
       imports:
         - sphinxcontrib.cairosvgconverter
       commands:
         - pip check
-      requires:
-        - pip
 
   - name: sphinxcontrib-svg2pdfconverter-with-rsvg
     build:
@@ -62,12 +63,12 @@ outputs:
         - {{ pin_subpackage("sphinxcontrib-svg2pdfconverter", max_pin="x.x.x") }}
         - librsvg
     test:
+      requires:
+        - pip
       imports:
         - sphinxcontrib.rsvgconverter
       commands:
         - pip check
-      requires:
-        - pip
 
   - name: sphinxcontrib-svg2pdfconverter-with-all
     build:
@@ -79,16 +80,16 @@ outputs:
     test:
       files:
         - converter_test.py
-      imports:
-        - sphinxcontrib
-      commands:
-        - python converter_test.py
       requires:
         - coverage
         - inkscape  # [win]
         - pytest
         - pytest-console-scripts
         - tectonic
+      imports:
+        - sphinxcontrib
+      commands:
+        - python converter_test.py
 
 about:
   home: https://github.com/missinglinkelectronics/sphinxcontrib-svg2pdfconverter
