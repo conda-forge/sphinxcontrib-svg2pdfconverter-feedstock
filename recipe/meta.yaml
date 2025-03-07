@@ -1,4 +1,4 @@
-{% set version = "1.2.3" %}
+{% set version = "1.3.0" %}
 
 # handle undefined PYTHON in `noarch: generic` outputs
 {% if PYTHON is not defined %}{% set PYTHON = "$PYTHON" %}{% endif %}
@@ -9,10 +9,10 @@ package:
 
 source:
   url: https://pypi.org/packages/source/s/sphinxcontrib-svg2pdfconverter/sphinxcontrib_svg2pdfconverter-{{ version }}.tar.gz
-  sha256: fb5d517b634c5629522004c59edce4d9050d89822408cab452c7d52fe5ae9824
+  sha256: 6411a4cc2f57eed96a0d7bbfa139f68cbe7983018881e1e6d7c46053cd69911f
 
 build:
-  number: 1
+  number: 0
   noarch: python
   script:
     - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
