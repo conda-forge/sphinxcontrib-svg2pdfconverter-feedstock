@@ -9,7 +9,7 @@ recipe:
   version: ${{ version }}
 
 source:
-  url: https://pypi.io/packages/source/s/sphinxcontrib-svg2pdfconverter/sphinxcontrib-svg2pdfconverter-${{ version }}.tar.gz
+  url: https://pypi.org/packages/source/s/sphinxcontrib-svg2pdfconverter/sphinxcontrib-svg2pdfconverter-${{ version }}.tar.gz
   sha256: 6411a4cc2f57eed96a0d7bbfa139f68cbe7983018881e1e6d7c46053cd69911f
 
 build:
