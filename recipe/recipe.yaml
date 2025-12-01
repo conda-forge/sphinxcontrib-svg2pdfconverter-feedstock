@@ -2,7 +2,8 @@
 schema_version: 1
 
 context:
-  version: 1.3.0
+  version: "2.0.0"
+  python_check_max: "3.14"
 
 recipe:
   name: sphinxcontrib-svg2pdfconverter
@@ -10,7 +11,7 @@ recipe:
 
 source:
   url: https://pypi.org/packages/source/s/sphinxcontrib-svg2pdfconverter/sphinxcontrib_svg2pdfconverter-${{ version }}.tar.gz
-  sha256: 6411a4cc2f57eed96a0d7bbfa139f68cbe7983018881e1e6d7c46053cd69911f
+  sha256: ab9c8f1080391e231812d20abf2657a69ee35574563b1014414f953964a95fa3
 
 build:
   number: 0
@@ -26,7 +27,7 @@ outputs:
       host:
         - pip
         - python ${{ python_min }}.*
-        - setuptools
+        - setuptools >=61.0.0
       run:
         - python >=${{ python_min }}
         - sphinx >=1.6.3
@@ -37,7 +38,9 @@ outputs:
             - sphinxcontrib.inkscapeconverter
             - sphinxcontrib.rsvgconverter
           pip_check: true
-          python_version: ${{ python_min }}.*
+          python_version:
+            - ${{ python_min }}.*
+            - ${{ python_check_max }}.*
 
   - package:
       name: sphinxcontrib-svg2pdfconverter-with-cairosvg
@@ -51,7 +54,12 @@ outputs:
       - python:
           imports: sphinxcontrib.cairosvgconverter
           pip_check: true
-          python_version: ${{ python_min }}.*
+          python_version:
+            - ${{ python_min }}.*
+            - ${{ python_check_max }}.*
+    about:
+      summary: Sphinx SVG to PDF converter extension (with all [cairosvg])
+
 
   - package:
       name: sphinxcontrib-svg2pdfconverter-with-rsvg
@@ -65,7 +73,11 @@ outputs:
       - python:
           imports: sphinxcontrib.rsvgconverter
           pip_check: true
-          python_version: ${{ python_min }}.*
+          python_version:
+            - ${{ python_min }}.*
+            - ${{ python_check_max }}.*
+    about:
+      summary: Sphinx SVG to PDF converter extension (with all [rsvg])
 
   - package:
       name: sphinxcontrib-svg2pdfconverter-with-all
@@ -79,7 +91,9 @@ outputs:
       - python:
           imports: sphinxcontrib
           pip_check: true
-          python_version: ${{ python_min }}.*
+          python_version:
+            - ${{ python_min }}.*
+            - ${{ python_check_max }}.*
       - files:
           recipe:
             - converter_test.py
@@ -94,7 +108,8 @@ outputs:
                 - inkscape
         script:
           - python converter_test.py
-
+    about:
+      summary: Sphinx SVG to PDF converter extension (with all [extras])
 
 about:
   summary: Sphinx SVG to PDF converter extension
