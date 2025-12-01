@@ -92,7 +92,6 @@ outputs:
         script:
           file: converter_test.py
 
-
 about:
   summary: Sphinx SVG to PDF converter extension
   license: BSD-2-Clause
