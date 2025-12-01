@@ -3,11 +3,42 @@ About sphinxcontrib-svg2pdfconverter-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/sphinxcontrib-svg2pdfconverter-feedstock/blob/main/LICENSE.txt)
 
+
+About sphinxcontrib-svg2pdfconverter
+------------------------------------
+
 Home: https://github.com/missinglinkelectronics/sphinxcontrib-svg2pdfconverter
 
 Package license: BSD-2-Clause
 
 Summary: Sphinx SVG to PDF converter extension
+
+About sphinxcontrib-svg2pdfconverter-with-all
+---------------------------------------------
+
+Home: https://github.com/missinglinkelectronics/sphinxcontrib-svg2pdfconverter
+
+Package license: BSD-2-Clause
+
+Summary: Sphinx SVG to PDF converter extension (with all [extras])
+
+About sphinxcontrib-svg2pdfconverter-with-cairosvg
+--------------------------------------------------
+
+Home: https://github.com/missinglinkelectronics/sphinxcontrib-svg2pdfconverter
+
+Package license: BSD-2-Clause
+
+Summary: Sphinx SVG to PDF converter extension (with all [cairosvg])
+
+About sphinxcontrib-svg2pdfconverter-with-rsvg
+----------------------------------------------
+
+Home: https://github.com/missinglinkelectronics/sphinxcontrib-svg2pdfconverter
+
+Package license: BSD-2-Clause
+
+Summary: Sphinx SVG to PDF converter extension (with all [rsvg])
 
 Current build status
 ====================
