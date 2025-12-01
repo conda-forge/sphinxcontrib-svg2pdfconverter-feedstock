@@ -3,6 +3,7 @@ schema_version: 1
 
 context:
   version: "2.0.0"
+  python_check_max: "3.14"
 
 recipe:
   name: sphinxcontrib-svg2pdfconverter
@@ -37,7 +38,9 @@ outputs:
             - sphinxcontrib.inkscapeconverter
             - sphinxcontrib.rsvgconverter
           pip_check: true
-          python_version: ${{ python_min }}.*
+          python_version:
+            - ${{ python_min }}.*
+            - ${{ python_check_max }}.*
 
   - package:
       name: sphinxcontrib-svg2pdfconverter-with-cairosvg
@@ -51,7 +54,12 @@ outputs:
       - python:
           imports: sphinxcontrib.cairosvgconverter
           pip_check: true
-          python_version: ${{ python_min }}.*
+          python_version:
+            - ${{ python_min }}.*
+            - ${{ python_check_max }}.*
+    about:
+      summary: Sphinx SVG to PDF converter extension (with all [cairosvg])
+
 
   - package:
       name: sphinxcontrib-svg2pdfconverter-with-rsvg
@@ -65,7 +73,11 @@ outputs:
       - python:
           imports: sphinxcontrib.rsvgconverter
           pip_check: true
-          python_version: ${{ python_min }}.*
+          python_version:
+            - ${{ python_min }}.*
+            - ${{ python_check_max }}.*
+    about:
+      summary: Sphinx SVG to PDF converter extension (with all [rsvg])
 
   - package:
       name: sphinxcontrib-svg2pdfconverter-with-all
@@ -79,8 +91,13 @@ outputs:
       - python:
           imports: sphinxcontrib
           pip_check: true
-          python_version: ${{ python_min }}.*
-      - requirements:
+          python_version:
+            - ${{ python_min }}.*
+            - ${{ python_check_max }}.*
+      - files:
+          recipe:
+            - converter_test.py
+        requirements:
           run:
             - coverage
             - pytest
@@ -90,7 +107,9 @@ outputs:
               then:
                 - inkscape
         script:
-          file: converter_test.py
+          - python converter_test.py
+    about:
+      summary: Sphinx SVG to PDF converter extension (with all [extras])
 
 about:
   summary: Sphinx SVG to PDF converter extension
