@@ -2,7 +2,7 @@
 schema_version: 1
 
 context:
-  version: "2.0.0"
+  version: "2.1.0"
   python_check_max: "3.14"
 
 recipe:
@@ -11,7 +11,7 @@ recipe:
 
 source:
   url: https://pypi.org/packages/source/s/sphinxcontrib-svg2pdfconverter/sphinxcontrib_svg2pdfconverter-${{ version }}.tar.gz
-  sha256: ab9c8f1080391e231812d20abf2657a69ee35574563b1014414f953964a95fa3
+  sha256: 9756e82d5f3bf11629ffcbafb1f8a1092d3bb4789e33494032cdce9a9c8459d3
 
 build:
   number: 0
@@ -48,7 +48,7 @@ outputs:
       noarch: generic
     requirements:
       run:
-        - ${{ pin_subpackage("sphinxcontrib-svg2pdfconverter", upper_bound="x.x.x") }}
+        - ${{ pin_subpackage("sphinxcontrib-svg2pdfconverter", exact=True) }}
         - cairosvg >=1.0
     tests:
       - python:
@@ -67,7 +67,7 @@ outputs:
       noarch: generic
     requirements:
       run:
-        - ${{ pin_subpackage("sphinxcontrib-svg2pdfconverter", upper_bound="x.x.x") }}
+        - ${{ pin_subpackage("sphinxcontrib-svg2pdfconverter", exact=True) }}
         - librsvg
     tests:
       - python:
@@ -85,19 +85,19 @@ outputs:
       noarch: generic
     requirements:
       run:
-        - ${{ pin_subpackage("sphinxcontrib-svg2pdfconverter-with-rsvg", upper_bound="x.x.x") }}
-        - ${{ pin_subpackage("sphinxcontrib-svg2pdfconverter-with-cairosvg", upper_bound="x.x.x") }}
+        - ${{ pin_subpackage("sphinxcontrib-svg2pdfconverter-with-rsvg", exact=True) }}
+        - ${{ pin_subpackage("sphinxcontrib-svg2pdfconverter-with-cairosvg", exact=True) }}
     tests:
       - python:
-          imports: sphinxcontrib
+          imports:
+            - sphinxcontrib.cairosvgconverter
+            - sphinxcontrib.inkscapeconverter
+            - sphinxcontrib.rsvgconverter
           pip_check: true
           python_version:
             - ${{ python_min }}.*
             - ${{ python_check_max }}.*
-      - files:
-          recipe:
-            - converter_test.py
-        requirements:
+      - requirements:
           run:
             - coverage
             - pytest
@@ -107,7 +107,7 @@ outputs:
               then:
                 - inkscape
         script:
-          - python converter_test.py
+          file: converter_test.py
     about:
       summary: Sphinx SVG to PDF converter extension (with all [extras])
 
@@ -115,7 +115,8 @@ about:
   summary: Sphinx SVG to PDF converter extension
   license: BSD-2-Clause
   license_file: LICENSE.txt
-  homepage: https://github.com/missinglinkelectronics/sphinxcontrib-svg2pdfconverter
+  homepage: https://pypi.org/project/sphinxcontrib-svg2pdfconverter
+  repository: https://github.com/missinglinkelectronics/sphinxcontrib-svg2pdfconverter
 
 extra:
   recipe-maintainers:
