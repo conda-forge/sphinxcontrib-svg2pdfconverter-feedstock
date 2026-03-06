@@ -2,7 +2,7 @@
 schema_version: 1
 
 context:
-  version: "2.0.0"
+  version: "2.1.0"
   python_check_max: "3.14"
 
 recipe:
@@ -11,7 +11,7 @@ recipe:
 
 source:
   url: https://pypi.org/packages/source/s/sphinxcontrib-svg2pdfconverter/sphinxcontrib_svg2pdfconverter-${{ version }}.tar.gz
-  sha256: ab9c8f1080391e231812d20abf2657a69ee35574563b1014414f953964a95fa3
+  sha256: 9756e82d5f3bf11629ffcbafb1f8a1092d3bb4789e33494032cdce9a9c8459d3
 
 build:
   number: 0
