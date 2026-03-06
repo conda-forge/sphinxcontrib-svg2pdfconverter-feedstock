@@ -22,13 +22,13 @@ TEST_ARGS = [
     "run",
     "--branch",
     "--include",
-    "*/sphinxcontrib/*converter.py",
+    *([f"--include=*/sphinxcontrib/{c}/*.py" for c in CONVERTERS]),
     "-m",
     "pytest",
     "-vv",
     "--tb=long",
     "--color=yes",
-    "converter_test.py",
+    __file__,
 ]
 REPORT_ARGS = [
     "coverage",
@@ -36,7 +36,7 @@ REPORT_ARGS = [
     "--show-missing",
     "--skip-covered",
     "--fail-under",
-    str(64 if INKSCAPE else 68),
+    "65",
 ]
 HERE = Path(__file__).parent
 
@@ -97,6 +97,8 @@ def a_project(request, tmp_path: Path) -> Path:
 
 
 def test_convert(a_project: Path, script_runner):
+    if not TECTONIC:
+        pytest.skip("no tectonic")
     sphinx_args = ["sphinx-build", "-W", "-j2", "-b", "latex", "src", "build"]
     cwd = a_project.parent
     res = script_runner.run(sphinx_args, cwd=str(cwd))
